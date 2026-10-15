@@ -8,7 +8,7 @@ CLI-бот на Python для **варианта 1** тестового зада
 
 Модель поиска работает на CPU; GPU и отдельная векторная БД не нужны. Нужен процессор x86-64 или arm64, для которого доступна сборка PyTorch. Заложите несколько ГБ свободного диска на окружение и кэш, с запасом от 5 ГБ: проверенное macOS-окружение занимает около 1.1 ГБ, веса E5 - около 475 МБ; размер зависимостей на другой ОС может отличаться.
 
-Репозиторий **приватный**: владелец должен предоставить доступ проверяющему. Для `git clone` войдите в GitHub через GitHub Desktop/настроенный credential helper либо используйте SSH с уже настроенным ключом. Пароль аккаунта GitHub не подходит для HTTPS Git; не вставляйте токены в URL.
+Репозиторий **публичный**: для просмотра и клонирования по HTTPS вход в GitHub и отдельный доступ от владельца не нужны.
 
 ```bash
 git clone https://github.com/M1te1K/mayak-rag-lite.git
@@ -179,7 +179,7 @@ python scripts/build_demo_pdf.py
 
 | Симптом | Что проверить |
 |---|---|
-| `git clone`: Repository not found / Authentication failed | Репозиторий приватный: проверьте доступ своего GitHub-аккаунта и вход через credential helper или GitHub Desktop |
+| `git clone`: Repository not found / Authentication failed | Проверьте URL репозитория и доступность GitHub из своей сети. Для чтения публичного репозитория по HTTPS вход не нужен |
 | `No matching distribution found` при установке | Используйте Python 3.13, активируйте `.venv`, проверьте интернет и доступность пакетов для своей ОС/архитектуры; lock проверен на macOS arm64 |
 | `No module named mayak` | Запустите установку из корня проекта в том же `.venv`, из которого вызываете Python |
 | Не удалось загрузить модель поиска | При первой загрузке нужен Hugging Face; проверьте сеть, свободный диск и `MODEL_CACHE_DIR`. `HF_HUB_OFFLINE=1` работает только с уже загруженными весами |
@@ -207,6 +207,6 @@ src/mayak/audit.py     JSONL, ротация, удаление секретов
 
 `Bot` не зависит от терминала: Telegram позже сможет вызывать `handle()` у отдельного экземпляра на пользователя. Пока один процесс CLI - одна сессия. Веб-поиск, Telegram, Docker и деплой в эту версию не входят.
 
-Репозиторий: [M1te1K/mayak-rag-lite](https://github.com/M1te1K/mayak-rag-lite), **private**. CI в `.github/workflows/tests.yml` выполняет Ruff, проверку форматирования, `pip check` и программные тесты без ключа и без загрузки embeddings. Фактический результат запуска проверяйте на вкладке [Actions](https://github.com/M1te1K/mayak-rag-lite/actions) и в протоколе проверок.
+Репозиторий: [M1te1K/mayak-rag-lite](https://github.com/M1te1K/mayak-rag-lite), **public**. CI в `.github/workflows/tests.yml` выполняет Ruff, проверку форматирования, `pip check` и программные тесты без ключа и без загрузки embeddings. Фактический результат запуска проверяйте на вкладке [Actions](https://github.com/M1te1K/mayak-rag-lite/actions) и в протоколе проверок.
 
 В Git включены исходники, тесты, скрипты, настройки CI, `pyproject.toml`, lock-файл, документация, вымышленный PDF с исходным текстом и DejaVu Sans с лицензией. `.env`, сырые журналы, кэши, виртуальные окружения, временные результаты, локальные `PROJECT_BRIEF.md` и `PROMPT_FOR_NEW_CHAT.md` исключены через `.gitignore`. Лицензия проекта отдельно не назначена; условия стороннего шрифта сохранены в `assets/LICENSE_DEJAVU`.
